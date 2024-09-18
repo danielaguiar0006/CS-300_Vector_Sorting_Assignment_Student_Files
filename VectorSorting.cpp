@@ -150,10 +150,17 @@ int partition(vector<Bid>& bids, int begin, int end) {
  */
 void quickSort(vector<Bid>& bids, int begin, int end) {
     //set mid equal to 0
+    int mid = 0;
 
     /* Base case: If there are 1 or zero bids to sort,
      partition is already sorted otherwise if begin is greater
      than or equal to end then return*/
+    if (begin >= end) {
+        return;
+    }
+    if (bids.size() <= 1) {
+        return;
+    }
 
     /* Partition bids into low and high such that
      midpoint is location of last element in low */
@@ -273,7 +280,22 @@ int main(int argc, char* argv[]) {
 
             break;
 
-        // FIXME (1b): Invoke the selection sort and report timing results
+        case 3:
+            // Initialize a timer variable before sorting bids
+            ticks = clock();
+
+            // Complete the method call to sort the bids
+            selectionSort(bids);
+
+            cout << bids.size() << " bids sorted" << endl;
+
+            // Calculate elapsed time and display result
+            ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+            cout << "time: " << ticks << " clock ticks" << endl;
+            cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+            break;
+
 
         // FIXME (2b): Invoke the quick sort and report timing results
 
