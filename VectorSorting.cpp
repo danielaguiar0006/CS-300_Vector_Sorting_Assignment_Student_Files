@@ -111,8 +111,6 @@ vector<Bid> loadBids(string csvPath) {
     return bids;
 }
 
-// FIXME (2a): Implement the quick sort logic over bid.title
-
 /**
  * Partition the vector of bids into two parts, low and high
  *
@@ -177,17 +175,16 @@ void quickSort(vector<Bid>& bids, int begin, int end) {
     if (begin >= end) {
         return;
     }
-    if (bids.size() <= 1) {
-        return;
-    }
 
     /* Partition bids into low and high such that
      midpoint is location of last element in low */
+    mid = partition(bids, begin, end);
      
     // recursively sort low partition (begin to mid)
+    quickSort(bids, begin, mid);
 
     // recursively sort high partition (mid+1 to end)
-
+    quickSort(bids, mid + 1, end);
 }
 
 /**
@@ -313,9 +310,20 @@ int main(int argc, char* argv[]) {
 
             break;
 
+        case 4:
+            // Initialize a timer variable before sorting bids
+            ticks = clock();
 
-        // FIXME (2b): Invoke the quick sort and report timing results
+            quickSort(bids, 0, bids.size() - 1);
 
+            cout << bids.size() << " bids sorted" << endl;
+
+            // Calculate elapsed time and display result
+            ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+            cout << "time: " << ticks << " clock ticks" << endl;
+            cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+            break;
         }
     }
 
