@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : VectorSorting.cpp
-// Author      : Your name
+// Author      : Daniel Aguiar
 // Version     : 1.0
 // Copyright   : Copyright © 2023 SNHU COCE
 // Description : Vector Sorting Algorithms
