@@ -122,21 +122,40 @@ vector<Bid> loadBids(string csvPath) {
  */
 int partition(vector<Bid>& bids, int begin, int end) {
     //set low and high equal to begin and end
+    int low = begin;
+    int high = end;
 
     // Calculate the middle element as middlePoint (int)
+    int middlePoint = (low + high) / 2;
     // Set Pivot as middlePoint element title to compare (string)  
+    string pivot = bids[middlePoint].title;
   
     // while not done 
-
+    while (low <= high) {
         // keep incrementing low index while bids[low].title < Pivot
-       
+        while (bids[low].title < pivot) {
+            low++;
+        }
         // keep decrementing high index while Pivot < bids[high].title
+        while (pivot < bids[high].title) {
+            high--;
+        }
 
         /* If there are zero or one elements remaining,
             all bids are partitioned. Return high */
+        if (low >= high) {
+            return high;
+        }
        // else swap the low and high bids (built in vector method)
             // move low and high closer ++low, --high
-    //return high;
+        else {
+            swap(bids[low], bids[high]);
+            low++;
+            high--;
+        }
+    }
+
+    return high;
 }
 
 /**
@@ -170,8 +189,6 @@ void quickSort(vector<Bid>& bids, int begin, int end) {
     // recursively sort high partition (mid+1 to end)
 
 }
-
-// FIXME (1a): Implement the selection sort logic over bid.title
 
 /**
  * Perform a selection sort on bid title
